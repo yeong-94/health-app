@@ -826,7 +826,75 @@ async function submitExpeditionPriority() {
 
     let weakestAreas = [];
     let healthiestAreas = [];
+function displaySecretResults() {
+    document.getElementById('result-student-name').innerText = studentName;
 
+    const stats = {
+        "구강 건강": answers.filter(
+            a => a.category === "구강 건강" && a.isCorrect
+        ).length,
+
+        "눈 건강": answers.filter(
+            a => a.category === "눈 건강" && a.isCorrect
+        ).length,
+
+        "적정 체중": answers.filter(
+            a =>
+                a.category === "적정 체중 및 건강관리" &&
+                a.isCorrect
+        ).length
+    };
+
+    updateBadgeStyle(
+        "badge-oral",
+        "badge-oral-status",
+        stats["구강 건강"]
+    );
+
+    updateBadgeStyle(
+        "badge-eye",
+        "badge-eye-status",
+        stats["눈 건강"]
+    );
+
+    updateBadgeStyle(
+        "badge-weight",
+        "badge-weight-status",
+        stats["적정 체중"]
+    );
+
+    return stats;
+}
+
+function updateBadgeStyle(elementId, textId, score) {
+    const badgeEl = document.getElementById(elementId);
+    const textEl = document.getElementById(textId);
+
+    if (score >= 4) {
+        badgeEl.className =
+            "p-4 rounded-3xl border-4 border-green-200 bg-green-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-md scale-100";
+
+        textEl.innerText = `👑 대장 (${score}/5)`;
+        textEl.className =
+            "text-[10px] mt-1 font-extrabold px-2 py-0.5 rounded-full bg-green-500 text-white animate-pulse";
+
+    } else if (score >= 3) {
+        badgeEl.className =
+            "p-4 rounded-3xl border-4 border-yellow-200 bg-yellow-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-sm scale-95";
+
+        textEl.innerText = `⭐ 노력파 (${score}/5)`;
+        textEl.className =
+            "text-[10px] mt-1 font-bold px-2 py-0.5 rounded-full bg-yellow-400 text-yellow-950";
+
+    } else {
+        badgeEl.className =
+            "p-4 rounded-3xl border-4 border-rose-300 bg-rose-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-lg scale-100 border-dashed";
+
+        textEl.innerText = `🚨 보완 필요 (${score}/5)`;
+        textEl.className =
+            "text-[10px] mt-1 font-black px-2 py-0.5 rounded-full bg-rose-500 text-white";
+    }
+}
         async function fetchAIWhimsicalAdvice() {
             document.getElementById('ai-loading').classList.remove('hidden');
             document.getElementById('ai-response-container').classList.add('hidden');
