@@ -620,7 +620,7 @@ function getStoredWebhookUrl() {
                     method: "POST",
                     mode: "no-cors",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "text/plain;charset=utf-8"
                     },
                     body: JSON.stringify(payload)
                 });
@@ -818,96 +818,115 @@ function getStoredWebhookUrl() {
 
         async function submitExpeditionPriority() {
             showView('step-results');
+
             const stats = displaySecretResults();
-async function submitExpeditionPriority() {
-    showView('step-results');
 
-    const stats = displaySecretResults();
+            const weakestAreas = [];
+            const healthiestAreas = [];
+            const categories = ["구강 건강", "눈 건강", "적정 체중"];
 
-    let weakestAreas = [];
-    let healthiestAreas = [];
-function displaySecretResults() {
-    document.getElementById('result-student-name').innerText = studentName;
+            categories.forEach(cat => {
+                if (stats[cat] <= 2) weakestAreas.push(cat);
+                if (stats[cat] >= 4) healthiestAreas.push(cat);
+            });
 
-    const stats = {
-        "구강 건강": answers.filter(
-            a => a.category === "구강 건강" && a.isCorrect
-        ).length,
+            const finalRecord = {
+                studentName: studentName,
+                timestamp: new Date().toISOString(),
+                priority: selectedPriority,
+                scores: stats,
+                weakest: weakestAreas,
+                healthiest: healthiestAreas,
+                aiResponse: ""
+            };
 
-        "눈 건강": answers.filter(
-            a => a.category === "눈 건강" && a.isCorrect
-        ).length,
+            saveRecordToLocal(finalRecord);
+            await postToGoogleSheets(finalRecord);
+        }
 
-        "적정 체중": answers.filter(
-            a =>
-                a.category === "적정 체중 및 건강관리" &&
-                a.isCorrect
-        ).length
-    };
+        function displaySecretResults() {
+            document.getElementById('result-student-name').innerText = studentName;
 
-    updateBadgeStyle(
-        "badge-oral",
-        "badge-oral-status",
-        stats["구강 건강"]
-    );
+            const stats = {
+                "구강 건강": answers.filter(
+                    a => a.category === "구강 건강" && a.isCorrect
+                ).length,
+                "눈 건강": answers.filter(
+                    a => a.category === "눈 건강" && a.isCorrect
+                ).length,
+                "적정 체중": answers.filter(
+                    a => a.category === "적정 체중 및 건강관리" && a.isCorrect
+                ).length
+            };
 
-    updateBadgeStyle(
-        "badge-eye",
-        "badge-eye-status",
-        stats["눈 건강"]
-    );
+            updateBadgeStyle(
+                "badge-oral",
+                "badge-oral-status",
+                stats["구강 건강"]
+            );
+            updateBadgeStyle(
+                "badge-eye",
+                "badge-eye-status",
+                stats["눈 건강"]
+            );
+            updateBadgeStyle(
+                "badge-weight",
+                "badge-weight-status",
+                stats["적정 체중"]
+            );
 
-    updateBadgeStyle(
-        "badge-weight",
-        "badge-weight-status",
-        stats["적정 체중"]
-    );
+            return stats;
+        }
 
-    return stats;
-}
+        function updateBadgeStyle(elementId, textId, score) {
+            const badgeEl = document.getElementById(elementId);
+            const textEl = document.getElementById(textId);
 
-function updateBadgeStyle(elementId, textId, score) {
-    const badgeEl = document.getElementById(elementId);
-    const textEl = document.getElementById(textId);
+            if (!badgeEl || !textEl) {
+                console.error("점수 배지 요소를 찾지 못했습니다:", elementId, textId);
+                return;
+            }
 
-    if (score >= 4) {
-        badgeEl.className =
-            "p-4 rounded-3xl border-4 border-green-200 bg-green-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-md scale-100";
+            if (score >= 4) {
+                badgeEl.className =
+                    "p-4 rounded-3xl border-4 border-green-200 bg-green-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-md scale-100";
+                textEl.innerText = `👑 대장 (${score}/5)`;
+                textEl.className =
+                    "text-[10px] mt-1 font-extrabold px-2 py-0.5 rounded-full bg-green-500 text-white animate-pulse";
+            } else if (score >= 3) {
+                badgeEl.className =
+                    "p-4 rounded-3xl border-4 border-yellow-200 bg-yellow-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-sm scale-95";
+                textEl.innerText = `⭐ 노력파 (${score}/5)`;
+                textEl.className =
+                    "text-[10px] mt-1 font-bold px-2 py-0.5 rounded-full bg-yellow-400 text-yellow-950";
+            } else {
+                badgeEl.className =
+                    "p-4 rounded-3xl border-4 border-rose-300 bg-rose-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-lg scale-100 border-dashed";
+                textEl.innerText = `🚨 보완 필요 (${score}/5)`;
+                textEl.className =
+                    "text-[10px] mt-1 font-black px-2 py-0.5 rounded-full bg-rose-500 text-white";
+            }
+        }
 
-        textEl.innerText = `👑 대장 (${score}/5)`;
-        textEl.className =
-            "text-[10px] mt-1 font-extrabold px-2 py-0.5 rounded-full bg-green-500 text-white animate-pulse";
-
-    } else if (score >= 3) {
-        badgeEl.className =
-            "p-4 rounded-3xl border-4 border-yellow-200 bg-yellow-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-sm scale-95";
-
-        textEl.innerText = `⭐ 노력파 (${score}/5)`;
-        textEl.className =
-            "text-[10px] mt-1 font-bold px-2 py-0.5 rounded-full bg-yellow-400 text-yellow-950";
-
-    } else {
-        badgeEl.className =
-            "p-4 rounded-3xl border-4 border-rose-300 bg-rose-50 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all pop-in duration-300 shadow-lg scale-100 border-dashed";
-
-        textEl.innerText = `🚨 보완 필요 (${score}/5)`;
-        textEl.className =
-            "text-[10px] mt-1 font-black px-2 py-0.5 rounded-full bg-rose-500 text-white";
-    }
-}
         async function fetchAIWhimsicalAdvice() {
             document.getElementById('ai-loading').classList.remove('hidden');
             document.getElementById('ai-response-container').classList.add('hidden');
             document.getElementById('trigger-ai-btn').classList.add('hidden');
             document.getElementById('ai-actions').classList.add('hidden');
 
-            let weakestAreas = [];
-            let healthiestAreas = [];
+            const weakestAreas = [];
+            const healthiestAreas = [];
 
             const stats = {
-                "구강 건강": answers.filter(a => a.category === "구강 건강" && a.isCorrect).length,
-                "눈 건강": answers.filter(a => a.category === "눈 건강" && a.isCorrect).length,
-                "적정 체중": answers.filter(a => a.category === "적정 체중 및 건강관리" && a.isCorrect).length
+                "구강 건강": answers.filter(
+                    a => a.category === "구강 건강" && a.isCorrect
+                ).length,
+                "눈 건강": answers.filter(
+                    a => a.category === "눈 건강" && a.isCorrect
+                ).length,
+                "적정 체중": answers.filter(
+                    a => a.category === "적정 체중 및 건강관리" && a.isCorrect
+                ).length
             };
 
             Object.entries(stats).forEach(([cat, count]) => {
@@ -915,7 +934,8 @@ function updateBadgeStyle(elementId, textId, score) {
                 if (count >= 4) healthiestAreas.push(cat);
             });
 
-            const systemPrompt = "당신은 초등학교 보건실에서 고학년(4~6학년) 학생들을 케어해주는 다정하고 스마트한 보건 교사 '하트 요정 선생님(하트쌤)'입니다. 학생들이 성숙하면서도 재미있게 받아들일 수 있도록 격려하고 친근한 말투(~요!, ~합니다! 💖)로 답변해 주세요. 비유를 활용하되 과학적인 지식도 전달해 주셔야 합니다.";
+            const systemPrompt =
+                "당신은 초등학교 보건실에서 고학년(4~6학년) 학생들을 케어해주는 다정하고 스마트한 보건 교사 '하트 요정 선생님(하트쌤)'입니다. 학생들이 성숙하면서도 재미있게 받아들일 수 있도록 격려하고 친근한 말투(~요!, ~합니다! 💖)로 답변해 주세요. 비유를 활용하되 과학적인 지식도 전달해 주셔야 합니다.";
 
             const userPrompt = `
 이름: ${studentName}
@@ -927,15 +947,14 @@ function updateBadgeStyle(elementId, textId, score) {
 다음 사항들을 포함하여 마크다운 양식으로 따뜻한 한국어 처방지를 작성해 주세요:
 1. 내 이름을 힘차고 다정하게 불러주며 응원 편지를 시작해 주세요.
 2. 우수하게 실천하는 영역이 있다면 칭찬을 해 주세요.
-3. [보완이 시급한 영역]이 있다면 무엇이 위험한지 구체적으로 재밌는 비유(예: 안구 건조 피로감 -> 촉촉 방패 가동 중단 마법, 구강 양치 소홀 -> 충치 제국의 비밀 누수, 적정체중 불균형 -> 에너지 공장 가동 중단)를 섞어 쉽고 과학적으로 풀어주세요. 그리고 이 행동을 바꿀 수 있는 '수호 요술 실천 가이드 3가지'를 상세하게 지시해 주십시오. (특히 사용자의 답변 데이터 중 부족하다고 답한 실생활 행동 수칙들과 직접 대응되는 재미있는 조언을 연계해 주세요!)
-4. 내가 다가오는 보건 수업에서 배울 주제로 꼽은 '${selectedPriority}'를 왜 꼭 배워야 하는지, 그 다음 시간이 왜 설레고 흥미진진할 것인지를 기대하게 만드는 문장으로 마무리해 주세요.
+3. 보완이 시급한 영역이 있다면 위험성을 쉽고 과학적으로 설명하고, 행동을 바꿀 수 있는 실천 가이드 3가지를 제시해 주세요.
+4. '${selectedPriority}' 수업을 왜 배워야 하는지 기대하게 만드는 문장으로 마무리해 주세요.
 `;
 
             try {
                 const responseText = await callGeminiAPI(userPrompt, systemPrompt);
-                
-                const renderedHTML = marked.parse(responseText);
-                document.getElementById('ai-markdown-content').innerHTML = renderedHTML;
+                document.getElementById('ai-markdown-content').innerHTML =
+                    marked.parse(responseText);
 
                 document.getElementById('ai-loading').classList.add('hidden');
                 document.getElementById('ai-response-container').classList.remove('hidden');
@@ -946,77 +965,78 @@ function updateBadgeStyle(elementId, textId, score) {
                     const lastIndex = localRecords.length - 1;
                     if (localRecords[lastIndex].studentName === studentName) {
                         localRecords[lastIndex].aiResponse = responseText;
-                        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRecords));
+                        localStorage.setItem(
+                            LOCAL_STORAGE_KEY,
+                            JSON.stringify(localRecords)
+                        );
                     }
                 }
             } catch (err) {
                 console.error("AI fetch failure", err);
                 document.getElementById('ai-loading').classList.add('hidden');
                 document.getElementById('trigger-ai-btn').classList.remove('hidden');
-                showAlert("하트 선생님의 연금 가마솥 온도가 잠시 떨어졌어요! '마법 가이드 해제하기'를 다시 눌러주세요.");
+                showAlert(
+                    "하트 선생님의 연결이 잠시 불안정해요. 잠시 뒤 '마법 가이드 해제하기'를 다시 눌러주세요."
+                );
             }
         }
-async function callGeminiAPI(userText, systemText) {
-    const webhookUrl = getStoredWebhookUrl();
 
-    if (!webhookUrl) {
-        throw new Error(
-            "Google Apps Script 웹앱 주소가 설정되지 않았습니다."
-        );
-    }
+        async function callGeminiAPI(userText, systemText) {
+            const webhookUrl = getStoredWebhookUrl();
 
-    const delays = [0, 1500, 3000];
-
-    for (let attempt = 0; attempt < delays.length; attempt++) {
-        if (delays[attempt] > 0) {
-            await new Promise(resolve =>
-                setTimeout(resolve, delays[attempt])
-            );
-        }
-
-        try {
-            const response = await fetch(webhookUrl, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-                body: JSON.stringify({
-                    action: "gemini",
-                    userPrompt: userText,
-                    systemPrompt: systemText
-                })
-            });
-
-            if (!response.ok) {
+            if (!webhookUrl) {
                 throw new Error(
-                    `Apps Script 연결 오류: ${response.status}`
+                    "Google Apps Script 웹앱 주소가 설정되지 않았습니다."
                 );
             }
 
-            const result = await response.json();
+            const delays = [0, 1500, 3000];
 
-            if (result.status !== "success") {
-                throw new Error(
-                    result.message ||
-                    "AI 답변 생성에 실패했습니다."
-                );
-            }
+            for (let attempt = 0; attempt < delays.length; attempt++) {
+                if (delays[attempt] > 0) {
+                    await new Promise(resolve =>
+                        setTimeout(resolve, delays[attempt])
+                    );
+                }
 
-            return result.answer;
+                try {
+                    const response = await fetch(webhookUrl, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "text/plain;charset=utf-8"
+                        },
+                        body: JSON.stringify({
+                            action: "gemini",
+                            userPrompt: userText,
+                            systemPrompt: systemText
+                        })
+                    });
 
-        } catch (error) {
-            console.error(
-                `AI 호출 ${attempt + 1}차 실패`,
-                error
-            );
+                    if (!response.ok) {
+                        throw new Error(
+                            `Apps Script 연결 오류: ${response.status}`
+                        );
+                    }
 
-            if (attempt === delays.length - 1) {
-                throw error;
+                    const result = await response.json();
+
+                    if (result.status !== "success") {
+                        throw new Error(
+                            result.message || "AI 답변 생성에 실패했습니다."
+                        );
+                    }
+
+                    return result.answer;
+                } catch (error) {
+                    console.error(`AI 호출 ${attempt + 1}차 실패`, error);
+
+                    if (attempt === delays.length - 1) {
+                        throw error;
+                    }
+                }
             }
         }
-    }
-}
-    
+
         function restartExpedition() {
             document.getElementById('student-name').value = '';
             document.getElementById('trigger-ai-btn').classList.remove('hidden');
@@ -1078,31 +1098,7 @@ function verifyTeacherPassword() {
         function loadTeacherDashboard() {
             showView('teacher-dashboard');
             document.getElementById('webhook-url-input').value = getStoredWebhookUrl();
-            
-            // API Key UI dynamically setup
-            if (!document.getElementById('api-key-setup-box')) {
-                const setupContainer = document.getElementById('webhook-url-input').closest('.grid');
-                const apiKeyBox = document.createElement('div');
-                apiKeyBox.id = "api-key-setup-box";
-                apiKeyBox.className = "bg-white p-4 rounded-2xl border border-amber-100 flex flex-col justify-between";
-                apiKeyBox.innerHTML = `
-                    <div>
-                        <span class="font-bold text-amber-800 block mb-2">🔑 제미나이 API 키(개인인증) 설정</span>
-                        <p class="text-[11px] text-slate-500 leading-relaxed mb-3">
-                            모바일이나 외부 브라우저에서 구글 로그인 없이 편하게 AI 처방전을 열려면 아래에 Gemini API 키를 넣고 저장하세요.
-                        </p>
-                        <input type="password" id="api-key-input" placeholder="AI Studio에서 발급받은 API Key" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-400 outline-none">
-                    </div>
-                    <button onclick="saveGeminiApiKey()" class="w-full mt-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 rounded-xl transition-colors text-xs">
-                        제미나이 API 키 저장하기 💾
-                    </button>
-                `;
-                setupContainer.appendChild(apiKeyBox);
-            }
-            
-            document.getElementById('api-key-input').value = localStorage.getItem(API_KEY_STORAGE_KEY) || "";
-
-            const records = getStoredRecords();
+const records = getStoredRecords();
             document.getElementById('record-count-text').innerText = records.length;
 
             const tableBody = document.getElementById('teacher-records-table');
