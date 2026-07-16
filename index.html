@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀 보건 탐험대 🩺 나만의 건강 마법 찾기</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for cute icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cute Google Fonts for Elementary Students -->
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Marked.js for beautiful AI response formatting -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            background: linear-gradient(135deg, #fef9c3 0%, #ecfdf5 50%, #dbeafe 100%);
+            overflow-x: hidden;
+        }
+        
+        .cute-font {
+            font-family: 'Gaegu', cursive;
+        }
+
+        .title-font {
+            font-family: 'Jua', sans-serif;
+        }
+
+        /* Whimsical animations */
+        .bounce-gentle {
+            animation: bounceGentle 3s infinite ease-in-out;
+        }
+        @keyframes bounceGentle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        .pop-in {
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Custom soft card style */
+        .cute-card {
+            border: 6px solid #fef08a;
+            box-shadow: 0 16px 0px #fef9c3, 0 20px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom scrollbar for cute look */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fffbeb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fef08a;
+            border-radius: 9999px;
+            border: 2px solid #fffbeb;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between py-4 px-2 sm:px-4">
+
+    <!-- Header -->
+    <header class="max-w-2xl mx-auto w-full text-center my-4 pop-in">
+        <div class="inline-flex items-center gap-3 bg-white/85 backdrop-blur-md px-6 py-3 rounded-full border-4 border-yellow-200 shadow-md">
+            <span class="text-3xl animate-bounce">🧚‍♀️</span>
+            <div>
+                <h1 class="title-font text-xl sm:text-2xl text-amber-700 tracking-wide">비밀 보건 탐험대</h1>
+                <p class="cute-font text-base text-emerald-600 font-bold -mt-1">우리 반 건강 실태 비밀 퀘스트 진행 중!</p>
+            </div>
+            <span class="text-3xl animate-pulse">🩺</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-2xl w-full mx-auto my-4 flex items-center justify-center">
+
+        <!-- STEP 1: Whimsical Intro -->
+        <div id="step-intro" class="w-full bg-white rounded-[40px] p-6 sm:p-10 cute-card pop-in text-center flex flex-col justify-between relative overflow-hidden">
+            <div class="absolute -top-10 -left-10 w-24 h-24 bg-pink-100 rounded-full opacity-50 blur-lg"></div>
+            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-100 rounded-full opacity-50 blur-lg"></div>
+
+            <div class="relative z-10">
+                <span class="cute-font text-lg font-bold text-amber-500 bg-amber-50 px-4 py-1.5 rounded-full border-2 border-dashed border-amber-200">
+                    비밀 건강 미션 개시!
+                </span>
+                
+                <!-- Mascot illustration -->
+                <div class="my-6 bounce-gentle flex justify-center">
+                    <div class="relative w-44 h-44 bg-yellow-50 rounded-full border-4 border-yellow-200 flex items-center justify-center shadow-inner">
+                        <svg viewBox="0 0 100 100" class="w-36 h-36">
+                            <circle cx="50" cy="53" r="30" fill="#fbcfe8" />
+                            <circle cx="32" cy="30" r="12" fill="#fbcfe8" />
+                            <circle cx="68" cy="30" r="12" fill="#fbcfe8" />
+                            <circle cx="32" cy="30" r="7" fill="#f472b6" />
+                            <circle cx="68" cy="30" r="7" fill="#f472b6" />
+                            <path d="M 38 27 L 62 27 L 57 15 L 43 15 Z" fill="#ffffff" stroke="#f472b6" stroke-width="2" />
+                            <path d="M 47 21 L 53 21 M 50 18 L 50 24" stroke="#e11d48" stroke-width="2" stroke-linecap="round" />
+                            <circle cx="42" cy="48" r="4.5" fill="#1e293b" />
+                            <circle cx="58" cy="48" r="4.5" fill="#1e293b" />
+                            <circle cx="43.5" cy="46.5" r="1.5" fill="#ffffff" />
+                            <circle cx="59.5" cy="46.5" r="1.5" fill="#ffffff" />
+                            <ellipse cx="36" cy="54" rx="5" ry="3" fill="#f43f5e" opacity="0.4" />
+                            <ellipse cx="64" cy="54" rx="5" ry="3" fill="#f43f5e" opacity="0.4" />
+                            <ellipse cx="50" cy="54" rx="3" ry="2" fill="#475569" />
+                            <path d="M 47 57 Q 50 60 53 57" stroke="#475569" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                            <path d="M 50 72 C 50 72 43 65 43 61 C 43 58 45.5 56 48.5 56 C 50 56 50 58 50 58 C 50 58 50 56 51.5 56 C 54.5 56 57 58 57 61 C 57 65 50 72 50 72 Z" fill="#f43f5e" />
+                        </svg>
+                        <span class="absolute -bottom-2 -right-1 bg-rose-400 text-white font-bold text-xs px-3 py-1 rounded-full shadow-md animate-pulse">하트쌤 🧚‍♀️</span>
+                    </div>
+                </div>
+
+                <h2 class="title-font text-2xl sm:text-3xl text-slate-800 leading-tight">
+                    진짜 내 건강 행동은 몇 점?<br>
+                    <span class="text-rose-500">랜덤 비밀 미션 카드</span>로 해결하자!
+                </h2>
+                
+                <p class="text-slate-500 text-sm sm:text-base mt-3 leading-relaxed px-2">
+                    우리가 무심코 넘겼던 구강, 눈, 몸의 습관들을 재미있게 탐험해 봐요! 비밀리에 섞여 나오는 15가지 나의 실제 모습을 점검하고, 인공지능(Gemini) 하트 요정 선생님의 정밀 진단 편지를 받아볼 수 있습니다!
+                </p>
+            </div>
+
+            <!-- Welcome Input Card -->
+            <div class="mt-8 bg-amber-50/50 p-5 rounded-[30px] border-4 border-dashed border-amber-200">
+                <label for="student-name" class="block text-sm font-bold text-amber-700 text-center mb-2 cute-font text-base font-extrabold">탐험대의 멋진 학번과 이름을 적어줘!</label>
+                <input type="text" id="student-name" placeholder="예: 5학년 2반 7번 이지혜" 
+                       class="w-full px-4 py-3 rounded-2xl border-2 border-amber-200 focus:outline-none focus:ring-4 focus:ring-amber-200 focus:border-amber-400 transition-all mb-4 text-center text-lg font-bold text-amber-900 placeholder-amber-300">
+                <button onclick="startSecretExpedition()" class="w-full bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-500 hover:to-green-600 text-white font-extrabold py-4 px-6 rounded-2xl shadow-[0_6px_0_#047857] hover:translate-y-[2px] hover:shadow-[0_4px_0_#047857] active:translate-y-[6px] active:shadow-none transition-all text-lg flex items-center justify-center gap-2 title-font tracking-wider">
+                    <span>비밀 건강 탐험 시작하기!</span>
+                    <i class="fa-solid fa-compass animate-spin"></i>
+                </button>
+            </div>
+            
+            <!-- Link to Teacher Panel -->
+            <button onclick="openTeacherAuthModal()" class="mt-4 text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors underline">
+                🔑 선생님 기록실 대시보드 열기 (구글 시트 연동 및 통계 확인)
+            </button>
+        </div>
+
+        <!-- STEP 2: The Secret Randomized Quiz (15 Questions) -->
+        <div id="step-quiz" class="hidden w-full bg-white rounded-[40px] p-6 sm:p-10 cute-card pop-in flex flex-col justify-between relative min-h-[500px]">
+            <div>
+                <div class="flex justify-between items-center text-sm font-bold text-slate-500 mb-3">
+                    <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs cute-font text-sm font-extrabold">
+                        🕵️‍♂️ 실시간 건강 습관 분석 중
+                    </span>
+                    <span id="quiz-progress-text" class="cute-font text-base text-indigo-900 font-extrabold">비밀 카드 1 / 15</span>
+                </div>
+                <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden p-0.5 border border-slate-200 shadow-inner">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-indigo-400 to-purple-400 h-full rounded-full transition-all duration-300" style="width: 6.6%"></div>
+                </div>
+            </div>
+
+            <!-- Randomized Question Card Area -->
+            <div class="my-8 text-center flex-grow flex flex-col justify-center">
+                <div class="relative inline-flex mx-auto mb-4">
+                    <span id="quiz-secret-icon" class="text-6xl filter drop-shadow-md animate-pulse">❓</span>
+                    <span class="absolute -top-2 -left-4 text-xl text-indigo-400 animate-bounce">❔</span>
+                    <span class="absolute -bottom-1 -right-3 text-lg text-purple-400 animate-bounce delay-100">✨</span>
+                </div>
+                
+                <div class="inline-block mx-auto text-xs bg-slate-100 text-slate-500 font-extrabold px-3 py-1 rounded-full mb-3 uppercase tracking-widest" id="secret-code-name">
+                    CODE: HEALTH-QUEST-01
+                </div>
+                
+                <h3 id="quiz-question" class="text-lg sm:text-xl md:text-2xl font-black text-slate-800 leading-relaxed max-w-lg mx-auto title-font">
+                    여기에 비밀 실태 설문 질문이 들어갑니다.
+                </h3>
+            </div>
+
+            <!-- Choices Container -->
+            <div id="quiz-choices" class="grid grid-cols-1 gap-3 sm:gap-4 max-w-md mx-auto w-full">
+                <!-- Choice buttons injected dynamically -->
+            </div>
+        </div>
+
+        <!-- STEP 3: Whispered Wish -->
+        <div id="step-priority" class="hidden w-full bg-white rounded-[40px] p-6 sm:p-10 cute-card pop-in text-center relative">
+            <span class="text-xs font-black text-rose-600 bg-rose-50 px-4 py-1.5 rounded-full border-2 border-dashed border-rose-200 cute-font text-base font-extrabold">
+                마지막 보물 열쇠 🔑
+            </span>
+            <h2 class="title-font text-2xl sm:text-3xl text-slate-800 mt-4 mb-2">하트 선생님에게 전하는 내 소원은?</h2>
+            <p class="text-slate-500 text-xs sm:text-sm mb-6 leading-relaxed">
+                다가오는 본격적인 보건 수업 시간에 가장 깊게 배우고 싶은 나만의 우선순위 주제는 무엇인가요? 우리 반 투표에 즉시 연동돼요!
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto text-left mb-8">
+                <!-- Option 1: Oral -->
+                <button onclick="selectPriority('구강 건강')" class="priority-opt-btn flex items-center p-4 rounded-3xl border-4 border-slate-100 hover:border-blue-300 hover:bg-blue-50/20 transition-all group w-full text-left bg-slate-50" data-value="구강 건강">
+                    <div class="bg-blue-100 text-blue-700 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mr-4 group-hover:scale-110 transition-transform">💎</div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-800 text-sm sm:text-base title-font">평생 치아 건강관리법</h4>
+                        <p class="text-[11px] text-slate-400 font-bold">올바른 양치 습관, 치실 쓰기, 치과 검진</p>
+                    </div>
+                </button>
+                <!-- Option 2: Eye -->
+                <button onclick="selectPriority('눈 건강')" class="priority-opt-btn flex items-center p-4 rounded-3xl border-4 border-slate-100 hover:border-amber-300 hover:bg-amber-50/20 transition-all group w-full text-left bg-slate-50" data-value="눈 건강">
+                    <div class="bg-amber-100 text-amber-700 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mr-4 group-hover:scale-110 transition-transform">🔮</div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-800 text-sm sm:text-base title-font">초롱초롱 시력 수호 작전</h4>
+                        <p class="text-[11px] text-slate-400 font-bold">전자기기 휴식 습관, 바른 광원과 환경</p>
+                    </div>
+                </button>
+                <!-- Option 3: Proper Weight -->
+                <button onclick="selectPriority('적정 체중 및 건강관리')" class="priority-opt-btn flex items-center p-4 rounded-3xl border-4 border-slate-100 hover:border-rose-300 hover:bg-rose-50/20 transition-all group w-full text-left bg-slate-50" data-value="적정 체중 및 건강관리">
+                    <div class="bg-rose-100 text-rose-700 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mr-4 group-hover:scale-110 transition-transform">⚡</div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-800 text-sm sm:text-base title-font">에너지 뿜뿜 적정 체중과 영양</h4>
+                        <p class="text-[11px] text-slate-400 font-bold">가공식품 줄이기, 올바른 운동과 수면법</p>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Submit button -->
+            <button id="priority-next-btn" disabled onclick="submitExpeditionPriority()" class="max-w-xs w-full mx-auto bg-slate-200 text-slate-400 font-extrabold py-4 px-6 rounded-2xl cursor-not-allowed transition-all text-base flex items-center justify-center gap-2 title-font shadow-inner">
+                <span>비밀의 문 개방하고 분석하기! 🔓</span>
+            </button>
+        </div>
+
+        <!-- STEP 4: Results Display -->
+        <div id="step-results" class="hidden w-full space-y-6 pop-in">
+            <!-- Student Header Banner -->
+            <div class="bg-gradient-to-r from-amber-400 via-rose-400 to-pink-500 rounded-[35px] p-6 text-white shadow-xl text-center relative overflow-hidden border-4 border-white">
+                <div class="absolute -top-4 -right-4 w-16 h-16 bg-white/20 rounded-full blur-md"></div>
+                <span class="text-xs bg-white/30 px-3 py-1 rounded-full font-bold uppercase cute-font text-sm">탐험 종료 & 보고서 보관 완료! 🎉</span>
+                <h2 class="text-2xl sm:text-3xl font-black mt-3 title-font"><span id="result-student-name">김건강</span> 대원의 기록장</h2>
+                <p class="text-pink-50 text-xs sm:text-sm mt-1 cute-font font-bold">사실 비밀 퀘스트 카드는 세 영역의 실태 분석 카드였어!</p>
+            </div>
+
+            <!-- Badges Showroom Grid -->
+            <div class="bg-white rounded-[35px] p-6 shadow-md border-4 border-yellow-100/50">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center justify-center gap-2 title-font">
+                    <span>✨ 나의 건강행동 실천 카드 등급 ✨</span>
+                </h3>
+                
+                <div class="grid grid-cols-3 gap-4">
+                    <!-- Oral Badge -->
+                    <div id="badge-oral" class="p-4 rounded-3xl border-2 border-slate-100 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all duration-300">
+                        <span class="text-4xl mb-1 filter drop-shadow-sm">🦷</span>
+                        <h4 class="font-extrabold text-xs sm:text-sm text-slate-800 title-font">구강 건강</h4>
+                        <span id="badge-oral-status" class="text-[10px] mt-1 font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">?</span>
+                    </div>
+
+                    <!-- Eye Badge -->
+                    <div id="badge-eye" class="p-4 rounded-3xl border-2 border-slate-100 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all duration-300">
+                        <span class="text-4xl mb-1 filter drop-shadow-sm">👁️</span>
+                        <h4 class="font-extrabold text-xs sm:text-sm text-slate-800 title-font">눈 건강</h4>
+                        <span id="badge-eye-status" class="text-[10px] mt-1 font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">?</span>
+                    </div>
+
+                    <!-- Proper Weight Badge -->
+                    <div id="badge-weight" class="p-4 rounded-3xl border-2 border-slate-100 text-center flex flex-col items-center justify-center relative overflow-hidden transition-all duration-300">
+                        <span class="text-4xl mb-1 filter drop-shadow-sm">🏃</span>
+                        <h4 class="font-extrabold text-xs sm:text-sm text-slate-800 title-font">적정 체중</h4>
+                        <span id="badge-weight-status" class="text-[10px] mt-1 font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">?</span>
+                    </div>
+                </div>
+
+                <div class="mt-5 p-3 rounded-2xl bg-amber-50 text-center text-xs text-amber-700 font-bold border border-amber-100/50">
+                    🏆 <span class="text-rose-500">🚨 보완 필요</span> 등급을 받은 영역이 이번 학기에 더 신경 써서 튼튼히 학습해야 할 항목이야!
+                </div>
+            </div>
+
+            <!-- AI Prescription Panel -->
+            <div class="bg-white rounded-[35px] p-6 sm:p-8 shadow-xl border-4 border-pink-200">
+                <div class="text-center pb-4 mb-4 border-b border-slate-100">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-pink-100 text-pink-500 rounded-2xl text-xl mb-2 animate-bounce">
+                        🧚‍♀️
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 title-font">하트 선생님의 마법 꿀팁 편지</h3>
+                    <p class="text-xs text-slate-400 font-bold">나의 일상 실태 분석 데이터를 활용한 1대1 처방전</p>
+                </div>
+
+                <!-- Run API Button -->
+                <button id="trigger-ai-btn" onclick="fetchAIWhimsicalAdvice()" class="w-full bg-gradient-to-r from-pink-400 to-rose-400 hover:from-pink-500 hover:to-rose-500 text-white font-extrabold py-4 px-6 rounded-2xl shadow-[0_6px_0_#be123c] hover:translate-y-[2px] hover:shadow-[0_4px_0_#be123c] active:translate-y-[6px] active:shadow-none transition-all text-base flex items-center justify-center gap-2 title-font">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>나만을 위한 마법 가이드 해제하기!</span>
+                </button>
+
+                <!-- Loading Animation -->
+                <div id="ai-loading" class="hidden py-12 text-center">
+                    <div class="inline-block relative w-16 h-16 mb-4">
+                        <div class="absolute top-0 left-0 w-full h-full border-4 border-pink-100 rounded-full"></div>
+                        <div class="absolute top-0 left-0 w-full h-full border-4 border-rose-400 rounded-full animate-spin border-t-transparent"></div>
+                    </div>
+                    <p class="text-slate-600 font-bold text-sm cute-font text-lg">하트쌤이 보건 무지개 물약을 가득 끓이고 있어요...</p>
+                    <p class="text-slate-400 text-xs font-bold">잠시만 기다리면 분석 데이터에 따른 멋진 가이드가 완성돼요!</p>
+                </div>
+
+                <!-- Markdown Content Container -->
+                <div id="ai-response-container" class="hidden text-slate-700 leading-relaxed text-sm sm:text-base space-y-4">
+                    <div id="ai-markdown-content" class="prose max-w-none text-slate-800 bg-rose-50/40 p-4 sm:p-6 rounded-3xl border-2 border-dashed border-rose-100">
+                        <!-- AI Markdown Content dynamically generated -->
+                    </div>
+                </div>
+
+                <!-- Back to Start Button (Inside AI card) -->
+                <div id="ai-actions" class="hidden mt-6 pt-4 border-t border-slate-100 text-center">
+                    <button onclick="restartExpedition()" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs transition-all title-font">
+                        <i class="fa-solid fa-rotate mr-1"></i> 다음 대원을 위해 비워두기 (처음으로)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Global Action Bar (Always visible at the bottom of the results screen) -->
+            <div class="mt-8 text-center bg-white rounded-[35px] p-6 border-4 border-dashed border-indigo-200 shadow-md">
+                <p class="text-xs text-slate-500 font-bold mb-3">🕵️‍♂️ 탐험 결과를 잘 기록했습니다! 다음 친구를 위해 메인 화면으로 돌아갈까요?</p>
+                <button onclick="restartExpedition()" class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-extrabold py-3.5 px-8 rounded-2xl shadow-lg transition-all transform active:scale-95 text-base title-font">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>처음 화면으로 돌아가기</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- TEACHER RECORDS DASHBOARD PANEL -->
+    <div id="teacher-dashboard" class="hidden max-w-4xl mx-auto w-full bg-white rounded-[40px] p-6 sm:p-10 border-4 border-emerald-400 shadow-2xl pop-in my-8">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-4 mb-6">
+            <div>
+                <h2 class="title-font text-2xl text-emerald-800">🧑‍🏫 비밀 보건 탐험대 대시보드</h2>
+                <p class="text-xs text-slate-500 font-bold">학급 전체 학생들의 실태 분석 현황과 구글 시트 연동을 관리합니다.</p>
+            </div>
+            <button onclick="closeTeacherDashboard()" class="text-slate-400 hover:text-slate-600 text-xl font-bold p-2">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Google Sheet Integration Settings Section -->
+        <div class="bg-amber-50 rounded-3xl p-5 border border-amber-200 mb-8">
+            <h3 class="font-extrabold text-amber-900 text-sm mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-file-excel text-emerald-600"></i>
+                <span>📊 선생님 전용 구글 시트(스프레드시트) 자동 실시간 연동법</span>
+            </h3>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                학생들이 탐험을 마칠 때마다 구글 스프레드시트에 행으로 <strong>이름, 점수, 피드백</strong> 등이 지체 없이 자동 저장됩니다. 아래 설정을 한 번만 따라 하시면 됩니다!
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="bg-white p-4 rounded-2xl border border-amber-100 space-y-2">
+                    <span class="font-bold text-amber-800">1단계. 구글 앱스 스크립트 등록</span>
+                    <ol class="list-decimal pl-4 text-slate-600 space-y-1">
+                        <li>구글 스프레드시트를 생성한 뒤 메뉴의 <strong>[확장 프로그램] -> [Apps Script]</strong>를 누릅니다.</li>
+                        <li>기존 코드를 다 지우고 하단 복사 버튼을 눌러 코드를 그대로 붙여넣습니다.</li>
+                        <li>오른쪽 위의 <strong>[배포] -> [새 배포]</strong>에서 유형을 '웹앱'으로 선택합니다.</li>
+                        <li><strong>액세스 권한을 가진 사용자</strong>를 <span class="text-rose-600 font-bold">"모든 사용자(Anyone)"</span>로 설정하고 배포합니다.</li>
+                        <li>생성된 <strong>웹앱 URL</strong>을 복사하여 오른쪽 입력창에 넣어 저장해 주세요.</li>
+                    </ol>
+                    <button onclick="copyAppsScriptCode()" class="mt-2 px-3 py-1 bg-amber-100 text-amber-800 font-bold rounded-lg hover:bg-amber-200 transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-copy"></i> 스크립트 코드 복사하기
+                    </button>
+                </div>
+                
+                <div class="bg-white p-4 rounded-2xl border border-amber-100 flex flex-col justify-between">
+                    <div>
+                        <span class="font-bold text-amber-800 block mb-2">2단계. 구글 웹앱(Apps Script) URL 설정</span>
+                        <p class="text-[11px] text-slate-500 leading-relaxed mb-3">
+                            배포하여 가져온 URL을 기입하고 저장하면 연동 세팅이 완료됩니다. (브라우저 로컬 저장소에 안전하게 유지됩니다)
+                        </p>
+                        <input type="text" id="webhook-url-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-400 outline-none">
+                    </div>
+                    <button onclick="saveWebhookUrl()" class="w-full mt-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 rounded-xl transition-colors">
+                        구글 웹앱 URL 저장하기 💾
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytical Graphs or Simple Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-emerald-50 rounded-3xl p-5 border border-emerald-100">
+                <h3 class="font-extrabold text-slate-700 text-sm mb-3">🗳️ 우리 반 우선순위 수업 희망 투표 결과</h3>
+                <div class="space-y-3" id="priority-poll-results">
+                    <!-- Dynamic Bars will be loaded here -->
+                    <p class="text-xs text-slate-400 italic">제출된 통계가 아직 없습니다.</p>
+                </div>
+            </div>
+            
+            <div class="bg-indigo-50 rounded-3xl p-5 border border-indigo-100">
+                <h3 class="font-extrabold text-slate-700 text-sm mb-3">🚨 실천율 최저 취약 건강 카테고리 분포</h3>
+                <div class="space-y-3" id="vulnerable-category-chart">
+                    <!-- Dynamic statistics will load here -->
+                    <p class="text-xs text-slate-400 italic">제출된 통계가 아직 없습니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submissions Table Header Action Bar -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-2 mb-3">
+            <span class="text-xs text-slate-500 font-bold">📋 대원 누적 결과 목록 (전체 <span id="record-count-text">0</span>명 기록됨)</span>
+            <div class="flex gap-2">
+                <button onclick="exportToCSV()" class="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow">
+                    <i class="fa-solid fa-file-csv"></i> 엑셀용 CSV 파일 다운로드
+                </button>
+                <button onclick="triggerClearConfirm()" class="px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow">
+                    <i class="fa-solid fa-trash-can"></i> 전체 데이터 초기화
+                </button>
+            </div>
+        </div>
+
+        <!-- Submissions Table/List -->
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+            <table class="min-w-full divide-y divide-slate-200 text-left text-xs">
+                <thead class="bg-slate-50 text-slate-600 font-bold">
+                    <tr>
+                        <th class="px-4 py-3">학번/이름</th>
+                        <th class="px-4 py-3">우선순위 희망</th>
+                        <th class="px-4 py-3">구강</th>
+                        <th class="px-4 py-3">눈</th>
+                        <th class="px-4 py-3">적정 체중</th>
+                        <th class="px-4 py-3">상세/처방</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 bg-white" id="teacher-records-table">
+                    <tr>
+                        <td colspan="6" class="px-4 py-8 text-center text-slate-400 italic font-bold">제출 기록을 불러오고 있습니다...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Whimsical Dialog Modal for Error handling / Alerts -->
+    <div id="custom-alert" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-[35px] max-w-sm w-full p-6 shadow-2xl border-4 border-pink-200 text-center pop-in">
+            <div class="bg-pink-100 text-pink-500 w-14 h-14 rounded-full flex items-center justify-center text-2xl mx-auto mb-4 animate-bounce">
+                🧸
+            </div>
+            <h4 class="font-extrabold text-slate-800 text-lg mb-2 title-font">잠깐만요!</h4>
+            <p id="custom-alert-message" class="text-xs sm:text-sm text-slate-500 mb-6 font-bold">내용을 확인해 주세요!</p>
+            <button onclick="closeAlert()" class="w-full bg-rose-400 hover:bg-rose-500 text-white font-extrabold py-3 px-4 rounded-xl transition-all text-sm title-font shadow-[0_4px_0_#9f1239]">
+                확인했습니다!
+            </button>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal (Instead of confirm) -->
+    <div id="custom-confirm" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-[35px] max-w-sm w-full p-6 shadow-2xl border-4 border-red-200 text-center pop-in">
+            <div class="bg-red-100 text-red-500 w-14 h-14 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                ⚠️
+            </div>
+            <h4 class="font-extrabold text-slate-800 text-lg mb-2 title-font">주의해 주세요!</h4>
+            <p class="text-xs sm:text-sm text-slate-500 mb-6 font-bold">현재 브라우저에 저장된 모든 대원들의 자가진단 누적 기록이 영구적으로 지워집니다. 진행할까요?</p>
+            <div class="flex gap-2">
+                <button onclick="closeConfirmModal()" class="w-1/2 bg-slate-200 text-slate-600 font-bold py-3 rounded-xl hover:bg-slate-300 text-sm">취소</button>
+                <button onclick="confirmClearAllLocalRecords()" class="w-1/2 bg-red-500 text-white font-bold py-3 rounded-xl hover:bg-red-650 text-sm shadow-[0_4px_0_#991b1b]">전체 삭제</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Auth Password Prompt Modal -->
+    <div id="teacher-auth-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+        <div class="bg-white rounded-[35px] max-w-sm w-full p-6 shadow-2xl border-4 border-emerald-300 text-center pop-in">
+            <div class="bg-emerald-100 text-emerald-500 w-14 h-14 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
+                🧑‍🏫
+            </div>
+            <h4 class="font-extrabold text-slate-800 text-lg mb-2 title-font">선생님 전용 인증</h4>
+            <p class="text-xs text-slate-400 mb-4 font-bold">대시보드를 확인하기 위한 비밀번호를 입력하세요.</p>
+            
+            <div class="relative mb-4">
+                <input type="password" id="teacher-password-input" placeholder="비밀번호 입력" onkeydown="if(event.key === 'Enter') verifyTeacherPassword()" class="w-full px-4 py-2.5 pr-10 border border-slate-200 rounded-xl text-center text-base focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none">
+                    <i id="password-toggle-icon" class="fa-solid fa-eye"></i>
+                </button>
+            </div>
+            
+            <div class="flex gap-2">
+                <button onclick="closeTeacherAuthModal()" class="w-1/2 bg-slate-200 text-slate-600 font-bold py-3 rounded-xl hover:bg-slate-300 text-sm">취소</button>
+                <button onclick="verifyTeacherPassword()" class="w-1/2 bg-emerald-500 text-white font-bold py-3 rounded-xl hover:bg-emerald-600 text-sm shadow-[0_4px_0_#065f46]">인증하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Detail Prescription View Modal (Inside Teacher Panel) -->
+    <div id="student-detail-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div class="bg-white rounded-[40px] max-w-xl w-full p-6 sm:p-8 shadow-2xl border-4 border-yellow-200 text-left pop-in max-h-[85vh] flex flex-col justify-between">
+            <div class="overflow-y-auto pr-2 flex-grow">
+                <h3 class="title-font text-xl text-slate-800 border-b pb-2 mb-4">대원 개별 실태 데이터 상세보기</h3>
+                <div id="student-detail-content" class="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+            <button onclick="closeStudentDetailModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl mt-4 text-sm">
+                닫기
+            </button>
+        </div>
+    </div>
+
+    <!-- Whimsical Footer -->
+    <footer class="max-w-md mx-auto text-center py-4 text-[10px] text-slate-400 font-bold">
+        <p>🍭 우당탕탕 보건실 비밀 탐험대 🍭</p>
+        <p class="mt-0.5 opacity-70">powered by Gemini AI, designed for curious class</p>
+    </footer>
+
+    <!-- App Logic Scripts -->
+    <script>
+        const apiKey = ""; 
+        let studentName = "";
+        let currentQuizIndex = 0;
+        let selectedPriority = "";
+        let answers = []; 
+        let shuffledQuiz = []; 
+
+        // Get API key from either hardcoded variable or local storage (for mobile reliability)
+        function getGeminiApiKey() {
+            return apiKey || localStorage.getItem("health_expedition_gemini_api_key") || "";
+        }
+
+        // 40 questions completely customized for 4th-6th grade based on requested items. Water-redundancy completely fixed.
+        const database = {
+            "구강 건강": [
+                { question: "식사를 마친 후나 밤에 잠자기 전에 최소 2분 이상 꼬박꼬박 양치질을 실시하나요?", positive: true },
+                { question: "치아의 안쪽, 바깥쪽, 씹는 면, 그리고 잇몸 가까운 경계선과 혓바닥까지 부드럽고 꼼꼼하게 다 골고루 닦아주나요?", positive: true },
+                { question: "충치를 훨씬 더 강력하게 막을 수 있도록 불소가 들어있는 불소 치약을 올바르게 사용하고 있나요?", positive: true },
+                { question: "치아 교정장치를 착용하고 있거나, 어금니의 좁고 깊은 구석 홈 부위까지 세심하게 신경 써서 닦나요?", positive: true },
+                { question: "칫솔모가 들어가기 힘든 이빨과 이빨 사이를 청결히 하기 위해, 하루에 최소 한 번 치실이나 치간칫솔을 사용하나요?", positive: true },
+                { question: "치실을 사용하다 피가 날 때, 며칠 동안 피가 멈추지 않고 계속 나온다면 치과를 찾아가 진찰을 받나요?", positive: true },
+                { question: "보건실이나 치과의 안내를 듣고, 충치를 집중 예방해 주는 불소도포나 치아 홈 메우기(실란트)를 해보았나요?", positive: true },
+                { question: "현재 이빨이 크게 아프지 않고 이상이 없는 상황이라도, 6개월에서 1년마다 치과를 정기적으로 방문해 검사받나요?", positive: true },
+                { question: "이빨 색이 까맣게 변했거나, 미세한 구멍이 보이거나, 양치할 때 피가 2주 이상 멈추지 않는 등 이상이 생기면 바로 알리나요?", positive: true },
+                { question: "치과에서 충치 치료가 끝난 다음에도 안심하고 방치하지 않고, 여전히 꼼꼼한 양치질과 관리를 잘 지속하나요?", positive: true },
+                { question: "충치의 주범이 되는 아주 달달한 초콜릿, 탄산음료, 또는 치아에 착 달라붙는 젤리나 끈적한 캐러멜 간식을 줄이려고 노력하나요?", positive: true },
+                { question: "치아를 직접 부식시키고 상하게 하는 콜라, 사이다 같은 탄산음료나 주스를 되도록 피하거나 마시지 않으려 하나요?", positive: true },
+                { question: "탄산음료를 마신 직후에는 에나멜이 약해지므로, 물로 입안을 가볍게 헹군 뒤 잠시 시간이 지난 후 양치질을 하나요?", positive: true },
+                { question: "치아 표면의 미세한 찌꺼기를 쓸어내고 잇몸을 다져주는 섬유질 가득한 채소와 신선한 과일을 충분히 섭취하나요?", positive: true },
+                { question: "소중한 내 영구치아에 실금이 가거나 조각이 깨지지 않도록 딱딱한 고체 얼음 등을 어금니로 세게 깨물어 먹지 않나요?", positive: true }
+            ],
+            "눈 건강": [
+                { question: "스마트 기기나 모니터를 볼 때, 50분 동안 집중한 다음에는 최소 10분 동안 창밖 먼 곳을 보며 눈을 편히 쉬어주나요?", positive: true },
+                { question: "전자기기 화면을 집중해서 오래 볼 때, 안구가 건조해져 뻑뻑해지는 것을 막고자 일부러 의식적으로 눈을 자주 깜빡이나요?", positive: true },
+                { question: "디스플레이 화면의 피로도를 줄여주기 위해 컴퓨터나 폰에 블루라이트(청색광) 차단 필터나 눈 보호 앱을 적용하나요?", positive: true },
+                { question: "책이나 태블릿, 노트북 화면을 읽거나 조작할 때 안구와 화면 사이의 최소 안전거리를 너무 가깝지 않게 잘 지키나요?", positive: true },
+                { question: "공부하거나 책을 볼 때 고개를 거북이처럼 쭉 빼지 않고, 척추 허리와 목줄기를 바르게 쭉 편 자세를 유지하나요?", positive: true },
+                { question: "눈 주변이 간지럽거나 답답함을 느낄 때, 더러운 손으로 눈을 억지로 비비거나 눈두덩이를 세게 꾹 누르지 않나요?", positive: true },
+                { question: "눈에 속눈썹이나 미세 이물질이 들어갔을 때, 손으로 긁지 않고 안전한 인공눈물로 흘려보내거나 눈을 감은 채 쉬나요?", positive: true },
+                { question: "미세먼지나 황사 농도 예보 수치가 매우 나쁨인 날에는 자발적으로 긴 야외 활동이나 불필요한 외출을 자제하나요?", positive: true },
+                { question: "시세포 발달과 전반적인 망막 건강을 돕기 위해서, 하루 2시간 이상 야외에서 밝게 뛰어노는 바깥 활동 시간이 있나요?", positive: true },
+                { question: "눈에 위험한 자외선이 쏟아지는 뜨거운 한여름이나 맑은 날 야외 외출 시, 모자나 안전한 선글라스를 장비하고 가나요?", positive: true },
+                { question: "시력 검사 결과 안경을 쓰라는 보건 처방을 받았다면, 미루지 않고 나에게 알맞은 교정용 안경을 수시로 잘 착용하나요?", positive: true },
+                { question: "각막 표면에 풍부한 산소를 공급하고 세균 위생을 안전하게 지키기 위해, 멋 부리는 렌즈보다 깨끗한 안경을 주로 쓰나요?", positive: true },
+                { question: "일회용 인공눈물 용기를 똑 따서 처음 뜯었을 때, 뚜껑 미세 플라스틱 가루를 걸러내고자 첫 한두 방울은 흘려보내고 쓰나요?", positive: true },
+                { question: "안구 주변의 굳어진 근육들을 풀고 시야를 편안히 하고자 눈동자를 사방으로 부드럽게 굴리는 안구 스트레칭을 정기적으로 해주나요?", positive: true },
+                { question: "눈세포를 보호하는 항산화 성분이 든 당근, 블루베리, 건강한 등푸른생선, 비타민 C 과일 등을 평소 편식 없이 잘 먹나요?", positive: true },
+                { question: "매년 잊지 않고 안과를 방문하여 꼼꼼한 눈 검진을 받고, 발생한 눈 알레르기 질환은 미루지 않고 즉각 치료하나요?", positive: true },
+                { question: "눈 건강과 각막 점막에 아주 따갑고 치명적인 손상을 주는 타인의 나쁜 담배 연기 공간을 알아서 자발적으로 피해 가나요?", positive: true }
+            ],
+            "적정 체중 및 건강관리": [
+                { question: "두뇌가 맑아지고 몸 안의 성장 세포가 힘을 내도록 매일 밤 규칙적으로 깊은 잠에 들며 9~10시간 동안 충분히 자나요?", positive: true },
+                { question: "몸을 움직이는 전신 칼로리를 지키고 비만을 막고자, 미디어를 보는 스마트폰과 TV 시청량을 하루 1~2시간 이하로 조율하나요?", positive: true },
+                { question: "나의 현 체질 조건과 체력에 맞춰 적정 강도와 운동을 택하고 주 3회 이상 꾸준히 규칙적인 신체 놀이와 체력 단련을 하나요?", positive: true },
+                { question: "키 성장에 꼭 필요한 영양소(단백질, 칼슘, 비타민 등)가 결핍되지 않게 하루 세 끼 고른 영양가 밥상을 든든히 먹나요?", positive: true },
+                { question: "목이 마르고 갈증이 발생할 때, 살을 찌게 만드는 설탕 주스나 청량음료 대신 맑고 신선한 깨끗한 맹수를 먼저 마시나요?", positive: true },
+                { question: "지방 배출을 유도하고 소화를 원활하게 해주는 초록색 섬유질 채소류, 해조류(김, 미역), 정제 안 된 통곡물을 골고루 잘 먹나요?", positive: true },
+                { question: "적정 포만감을 느끼고 소화가 급하지 않게, 입안에 넣은 맛있는 반찬과 밥을 허겁지겁 삼키지 않고 오랫동안 씹나요?", positive: true },
+                { question: "소아 및 청소년 비만이 단순히 겉보기 체중 수치를 넘어, 나의 심장 체력과 여러 피로도 질병에 직결됨을 깊이 이해하나요?", positive: true }
+            ]
+        };
+
+        const LOCAL_STORAGE_KEY = "health_expedition_class_records";
+        const WEBHOOK_STORAGE_KEY = "health_expedition_webhook_url";
+        const API_KEY_STORAGE_KEY = "health_expedition_gemini_api_key";
+
+        function getStoredRecords() {
+            try {
+                const records = localStorage.getItem(LOCAL_STORAGE_KEY);
+                return records ? JSON.parse(records) : [];
+            } catch (e) {
+                console.error("Local storage read fail", e);
+                return [];
+            }
+        }
+
+        function saveRecordToLocal(record) {
+            try {
+                const existing = getStoredRecords();
+                existing.push(record);
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(existing));
+                return existing;
+            } catch (e) {
+                console.error("Local storage save fail", e);
+            }
+        }
+
+        function getStoredWebhookUrl() {
+            return localStorage.getItem(WEBHOOK_STORAGE_KEY) || "";
+        }
+
+        function saveWebhookUrl() {
+            const urlInput = document.getElementById('webhook-url-input').value.trim();
+            localStorage.setItem(WEBHOOK_STORAGE_KEY, urlInput);
+            showAlert("구글 Webhook URL이 브라우저 로컬 저장소에 영구 저장되었습니다! 💾");
+        }
+
+        function saveGeminiApiKey() {
+            const keyInput = document.getElementById('api-key-input').value.trim();
+            localStorage.setItem(API_KEY_STORAGE_KEY, keyInput);
+            showAlert("제미나이 API 키가 브라우저에 안전하게 저장되었습니다! 이제 모바일에서도 원활하게 동작합니다. 🔑");
+        }
+
+        // Post submission to Google Sheets Web App Webhook (Real-time syncing)
+        async function postToGoogleSheets(recordData) {
+            const webhookUrl = getStoredWebhookUrl();
+            if (!webhookUrl) {
+                console.log("No webhook configured. Skipping Google Sheets real-time sync.");
+                return;
+            }
+
+            try {
+                const payload = {
+                    timestamp: recordData.timestamp,
+                    studentName: recordData.studentName,
+                    priority: recordData.priority,
+                    oralScore: recordData.scores["구강 건강"],
+                    eyeScore: recordData.scores["눈 건강"],
+                    weightScore: recordData.scores["적정 체중"],
+                    weakest: recordData.weakest.join(", "),
+                    healthiest: recordData.healthiest.join(", ")
+                };
+
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+                console.log("Submission successfully synced to Google Sheets.");
+            } catch (err) {
+                console.error("Failed to sync directly with Google Sheet webhook", err);
+            }
+        }
+
+        function copyAppsScriptCode() {
+            const scriptCode = `function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var rawData = e.postData.contents;
+    var data = JSON.parse(rawData);
+    
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        "제출 시간", 
+        "학번 및 이름", 
+        "수업 희망 우선순위", 
+        "구강 건강 실천 점수", 
+        "눈 건강 실천 점수", 
+        "적정 체중 실천 점수", 
+        "보완 필요 영역", 
+        "강점 실천 영역"
+      ]);
+    }
+    
+    sheet.appendRow([
+      data.timestamp,
+      data.studentName,
+      data.priority,
+      data.oralScore + " / 5",
+      data.eyeScore + " / 5",
+      data.weightScore + " / 5",
+      data.weakest,
+      data.healthiest
+    ]);
+    
+    return ContentService.createTextOutput(JSON.stringify({status: "success"}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({status: "error", message: err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}`;
+
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = scriptCode;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempTextArea);
+            
+            showAlert("구글 Apps Script 코드가 복사되었습니다! 📋 Google 스프레드시트 -> 확장프로그램 -> Apps Script에 붙여넣으세요.");
+        }
+
+        // Shuffle helper to select unique set of questions
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function showView(viewId) {
+            ['step-intro', 'step-quiz', 'step-priority', 'step-results', 'teacher-dashboard'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(viewId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showAlert(message) {
+            document.getElementById('custom-alert-message').innerText = message;
+            document.getElementById('custom-alert').classList.remove('hidden');
+        }
+
+        function closeAlert() {
+            document.getElementById('custom-alert').classList.add('hidden');
+        }
+
+        // Custom Confirm box triggers
+        function triggerClearConfirm() {
+            document.getElementById('custom-confirm').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('custom-confirm').classList.add('hidden');
+        }
+
+        function confirmClearAllLocalRecords() {
+            localStorage.removeItem(LOCAL_STORAGE_KEY);
+            closeConfirmModal();
+            loadTeacherDashboard();
+            showAlert("학급 수집 저장소가 영구적으로 지워졌습니다.🧹");
+        }
+
+        function startSecretExpedition() {
+            const input = document.getElementById('student-name');
+            studentName = input.value.trim();
+            if (!studentName) {
+                showAlert("학번과 이름을 멋지게 입력해줘! 예: 5학년 2반 7번 이지혜");
+                return;
+            }
+
+            // We sample exactly 5 random questions from Oral, 5 from Eye, and 5 from Weight (Total 15 items)
+            const sampledOral = shuffle([...database["구강 건강"]]).slice(0, 5).map(q => ({...q, category: "구강 건강"}));
+            const sampledEye = shuffle([...database["눈 건강"]]).slice(0, 5).map(q => ({...q, category: "눈 건강"}));
+            const sampledWeight = shuffle([...database["적정 체중 및 건강관리"]]).slice(0, 5).map(q => ({...q, category: "적정 체중 및 건강관리"}));
+
+            // Merge and shuffle all 15 questions so they appear randomly
+            shuffledQuiz = shuffle([...sampledOral, ...sampledEye, ...sampledWeight]);
+            currentQuizIndex = 0;
+            answers = [];
+
+            showView('step-quiz');
+            renderSecretQuestion();
+        }
+
+        function renderSecretQuestion() {
+            const currentItem = shuffledQuiz[currentQuizIndex];
+            
+            document.getElementById('quiz-progress-text').innerText = `비밀 카드 ${currentQuizIndex + 1} / 15`;
+            const progressPct = ((currentQuizIndex + 1) / 15) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progressPct}%`;
+            
+            // Mask actual category name
+            document.getElementById('secret-code-name').innerText = `SECRET CARD: 0${currentQuizIndex + 1}`;
+            
+            const funIcons = ["🕵️‍♂️", "🔍", "❓", "🔑", "🎲", "🌟", "🪄", "🔮", "✨"];
+            document.getElementById('quiz-secret-icon').innerText = funIcons[currentQuizIndex % funIcons.length];
+            
+            document.getElementById('quiz-question').innerText = currentItem.question;
+            
+            const container = document.getElementById('quiz-choices');
+            container.innerHTML = '';
+            
+            // Two friendly choices
+            const choices = [
+                { text: "네! 평상시에 아주 잘 지키고 있어요! 👍", isCorrect: true },
+                { text: "아니요, 자주 지키지 못하고 있어요... 😢", isCorrect: false }
+            ];
+
+            choices.forEach(choice => {
+                const btn = document.createElement('button');
+                btn.className = "w-full bg-slate-50 hover:bg-rose-50 text-slate-800 hover:text-rose-950 border-4 border-slate-100 hover:border-rose-200 rounded-[25px] p-4 text-left font-bold transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] flex items-start gap-3 shadow-sm text-sm sm:text-base";
+                btn.onclick = () => selectSecretAnswer(choice);
+                
+                btn.innerHTML = `<span class="text-rose-400 mt-1"><i class="fa-solid fa-star"></i></span> <span class="flex-1">${choice.text}</span>`;
+                container.appendChild(btn);
+            });
+        }
+
+        function selectSecretAnswer(choice) {
+            answers.push({
+                category: shuffledQuiz[currentQuizIndex].category,
+                question: shuffledQuiz[currentQuizIndex].question,
+                isCorrect: choice.isCorrect,
+                userText: choice.text
+            });
+
+            currentQuizIndex++;
+            if (currentQuizIndex < 15) {
+                renderSecretQuestion();
+            } else {
+                showView('step-priority');
+            }
+        }
+
+        function selectPriority(topic) {
+            selectedPriority = topic;
+            
+            document.querySelectorAll('.priority-opt-btn').forEach(btn => {
+                if (btn.getAttribute('data-value') === topic) {
+                    btn.classList.add('border-emerald-400', 'bg-emerald-50/40');
+                    btn.classList.remove('border-slate-100', 'bg-slate-50');
+                } else {
+                    btn.classList.remove('border-emerald-400', 'bg-emerald-50/40');
+                    btn.classList.add('border-slate-100', 'bg-slate-50');
+                }
+            });
+
+            const nextBtn = document.getElementById('priority-next-btn');
+            nextBtn.removeAttribute('disabled');
+            nextBtn.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed', 'shadow-inner');
+            nextBtn.classList.add('bg-gradient-to-r', 'from-emerald-400', 'to-emerald-500', 'text-white', 'hover:from-emerald-500', 'hover:to-emerald-600', 'shadow-[0_4px_0_#047857]');
+            nextBtn.innerHTML = "보안 해제하고 분석하기! 🔓";
+        }
+
+        async function submitExpeditionPriority() {
+            showView('step-results');
+            const stats = displaySecretResults();
+
+            let weakestAreas = [];
+            let healthiestAreas = [];
+            const categories = ["구강 건강", "눈 건강", "적정 체중"];
+            categories.forEach(cat => {
+                if (stats[cat] <= 2) weakestAreas.push(cat); 
+                if (stats[cat] >= 4) healthiestAreas.push(cat); 
+            });
+
+            const finalRecord = {
+                studentName: studentName,
+                timestamp: new Date().toISOString(),
+                priority: selectedPriority,
+                scores: stats,
+                weakest: weakestAreas,
+                healthiest: healthiestAreas,
+                aiResponse: "" 
+            };
+
+            saveRecordToLocal(finalRecord);
+            postToGoogleSheets(finalRecord);
+        }
+
+        function displaySecretResults() {
+            document.getElementById('result-student-name').innerText = studentName;
+
+            const stats = {
+                "구강 건강": answers.filter(a => a.category === "구강 건강" && a.isCorrect).length,
+                "눈 건강": answers.filter(a => a.category === "눈 건강" && a.isCorrect).length,
+                "적정 체중": answers.filter(a => a.category === "적정 체중 및 건강관리" && a.isCorrect).length
+            };
+
+            updateBadgeStyle("badge-oral", "badge-oral-status", stats["구강 건강"]);
+            updateBadgeStyle("badge-eye", "badge-eye-status", stats["눈 건강"]);
+            updateBadgeStyle("badge-weight", "badge-weight-status", stats["적정 체중"]);
+
+            return stats;
+        }
+
+        async function fetchAIWhimsicalAdvice() {
+            const activeKey = getGeminiApiKey();
+            if (!activeKey) {
+                document.getElementById('ai-loading').classList.add('hidden');
+                document.getElementById('trigger-ai-btn').classList.remove('hidden');
+                showAlert("보건교사 AI 편지를 열려면 제미나이 API 키 설정이 필요합니다. 우측 하단 [🔑 선생님 기록실]에서 API 키를 먼저 입력해 주세요!");
+                return;
+            }
+
+            document.getElementById('ai-loading').classList.remove('hidden');
+            document.getElementById('ai-response-container').classList.add('hidden');
+            document.getElementById('trigger-ai-btn').classList.add('hidden');
+            document.getElementById('ai-actions').classList.add('hidden');
+
+            let weakestAreas = [];
+            let healthiestAreas = [];
+
+            const stats = {
+                "구강 건강": answers.filter(a => a.category === "구강 건강" && a.isCorrect).length,
+                "눈 건강": answers.filter(a => a.category === "눈 건강" && a.isCorrect).length,
+                "적정 체중": answers.filter(a => a.category === "적정 체중 및 건강관리" && a.isCorrect).length
+            };
+
+            Object.entries(stats).forEach(([cat, count]) => {
+                if (count <= 2) weakestAreas.push(cat);
+                if (count >= 4) healthiestAreas.push(cat);
+            });
+
+            const systemPrompt = "당신은 초등학교 보건실에서 고학년(4~6학년) 학생들을 케어해주는 다정하고 스마트한 보건 교사 '하트 요정 선생님(하트쌤)'입니다. 학생들이 성숙하면서도 재미있게 받아들일 수 있도록 격려하고 친근한 말투(~요!, ~합니다! 💖)로 답변해 주세요. 비유를 활용하되 과학적인 지식도 전달해 주셔야 합니다.";
+
+            const userPrompt = `
+이름: ${studentName}
+내가 고른 제일 하고 싶은 보건 수업 주제: ${selectedPriority}
+나의 실태 점수: 구강 건강(${stats["구강 건강"]}/5점), 눈 건강(${stats["눈 건강"]}/5점), 적정 체중(${stats["적정 체중"]}/5점)
+이번 미션에서 좋은 습관을 보인 나의 강점 분야: ${healthiestAreas.length > 0 ? healthiestAreas.join(', ') : '없음 (이번 학기에 함께 무지개 습관을 길러보아요!)'}
+이번 미션에서 보완이 긴급한 약점 분야: ${weakestAreas.length > 0 ? weakestAreas.join(', ') : '없음 (완벽한 체력 수호자!)'}
+
+다음 사항들을 포함하여 마크다운 양식으로 따뜻한 한국어 처방지를 작성해 주세요:
+1. 내 이름을 힘차고 다정하게 불러주며 응원 편지를 시작해 주세요.
+2. 우수하게 실천하는 영역이 있다면 칭찬을 해 주세요.
+3. [보완이 시급한 영역]이 있다면 무엇이 위험한지 구체적으로 재밌는 비유(예: 안구 건조 피로감 -> 촉촉 방패 가동 중단 마법, 구강 양치 소홀 -> 충치 제국의 비밀 누수, 적정체중 불균형 -> 에너지 공장 가동 중단)를 섞어 쉽고 과학적으로 풀어주세요. 그리고 이 행동을 바꿀 수 있는 '수호 요술 실천 가이드 3가지'를 상세하게 지시해 주십시오. (특히 사용자의 답변 데이터 중 부족하다고 답한 실생활 행동 수칙들과 직접 대응되는 재미있는 조언을 연계해 주세요!)
+4. 내가 다가오는 보건 수업에서 배울 주제로 꼽은 '${selectedPriority}'를 왜 꼭 배워야 하는지, 그 다음 시간이 왜 설레고 흥미진진할 것인지를 기대하게 만드는 문장으로 마무리해 주세요.
+`;
+
+            try {
+                const responseText = await callGeminiAPI(userPrompt, systemPrompt);
+                
+                const renderedHTML = marked.parse(responseText);
+                document.getElementById('ai-markdown-content').innerHTML = renderedHTML;
+
+                document.getElementById('ai-loading').classList.add('hidden');
+                document.getElementById('ai-response-container').classList.remove('hidden');
+                document.getElementById('ai-actions').classList.remove('hidden');
+
+                const localRecords = getStoredRecords();
+                if (localRecords.length > 0) {
+                    const lastIndex = localRecords.length - 1;
+                    if (localRecords[lastIndex].studentName === studentName) {
+                        localRecords[lastIndex].aiResponse = responseText;
+                        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRecords));
+                        postToGoogleSheets(localRecords[lastIndex]);
+                    }
+                }
+            } catch (err) {
+                console.error("AI fetch failure", err);
+                document.getElementById('ai-loading').classList.add('hidden');
+                document.getElementById('trigger-ai-btn').classList.remove('hidden');
+                showAlert("하트 선생님의 연금 가마솥 온도가 잠시 떨어졌어요! '마법 가이드 해제하기'를 다시 눌러주세요.");
+            }
+        }
+
+        async function callGeminiAPI(userText, systemText) {
+            const activeKey = getGeminiApiKey();
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${activeKey}`;
+            const delays = [1000, 2000, 4000, 8000];
+
+            for (let i = 0; i < delays.length; i++) {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{ text: userText }]
+                            }],
+                            systemInstruction: {
+                                parts: [{ text: systemText }]
+                            }
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Server returned error: ${response.status}`);
+                    }
+
+                    const json = await response.json();
+                    return json.candidates?.[0]?.content?.parts?.[0]?.text || "요정 상담 멘트 수집에 일시적으로 실패했어요. 다시 연결해 보세요!";
+                } catch (error) {
+                    if (i === delays.length - 1) {
+                        throw error;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+
+        function restartExpedition() {
+            document.getElementById('student-name').value = '';
+            document.getElementById('trigger-ai-btn').classList.remove('hidden');
+            document.getElementById('ai-response-container').classList.add('hidden');
+            document.getElementById('ai-actions').classList.add('hidden');
+            
+            document.querySelectorAll('.priority-opt-btn').forEach(btn => {
+                btn.classList.remove('border-emerald-400', 'bg-emerald-50/40');
+                btn.classList.add('border-slate-100', 'bg-slate-50');
+            });
+            const nextBtn = document.getElementById('priority-next-btn');
+            nextBtn.setAttribute('disabled', 'true');
+            nextBtn.className = "max-w-xs w-full mx-auto bg-slate-200 text-slate-400 font-extrabold py-4 px-6 rounded-2xl cursor-not-allowed transition-all text-base flex items-center justify-center gap-2 title-font shadow-inner";
+            nextBtn.innerHTML = "비밀의 문 개방하고 분석하기! 🔓";
+
+            showView('step-intro');
+        }
+
+        function openTeacherAuthModal() {
+            document.getElementById('teacher-password-input').value = "";
+            // 비밀번호 숨김 상태로 강제 세팅 및 아이콘 초기화
+            const passwordInput = document.getElementById('teacher-password-input');
+            passwordInput.type = "password";
+            document.getElementById('password-toggle-icon').className = "fa-solid fa-eye";
+            document.getElementById('teacher-auth-modal').classList.remove('hidden');
+        }
+
+        function closeTeacherAuthModal() {
+            document.getElementById('teacher-auth-modal').classList.add('hidden');
+        }
+
+        function loadTeacherDashboard() {
+            showView('teacher-dashboard');
+            document.getElementById('webhook-url-input').value = getStoredWebhookUrl();
+            
+            // API Key UI dynamically setup
+            if (!document.getElementById('api-key-setup-box')) {
+                const setupContainer = document.getElementById('webhook-url-input').closest('.grid');
+                const apiKeyBox = document.createElement('div');
+                apiKeyBox.id = "api-key-setup-box";
+                apiKeyBox.className = "bg-white p-4 rounded-2xl border border-amber-100 flex flex-col justify-between";
+                apiKeyBox.innerHTML = `
+                    <div>
+                        <span class="font-bold text-amber-800 block mb-2">🔑 제미나이 API 키(개인인증) 설정</span>
+                        <p class="text-[11px] text-slate-500 leading-relaxed mb-3">
+                            모바일이나 외부 브라우저에서 구글 로그인 없이 편하게 AI 처방전을 열려면 아래에 Gemini API 키를 넣고 저장하세요.
+                        </p>
+                        <input type="password" id="api-key-input" placeholder="AI Studio에서 발급받은 API Key" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs focus:ring-2 focus:ring-emerald-400 outline-none">
+                    </div>
+                    <button onclick="saveGeminiApiKey()" class="w-full mt-3 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 rounded-xl transition-colors text-xs">
+                        제미나이 API 키 저장하기 💾
+                    </button>
+                `;
+                setupContainer.appendChild(apiKeyBox);
+            }
+            
+            document.getElementById('api-key-input').value = localStorage.getItem(API_KEY_STORAGE_KEY) || "";
+
+            const records = getStoredRecords();
+            document.getElementById('record-count-text').innerText = records.length;
+
+            const tableBody = document.getElementById('teacher-records-table');
+
+            if (records.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="px-4 py-8 text-center text-slate-400 italic font-bold">아직 제출된 학생 자가진단 기록이 없습니다.</td></tr>`;
+                document.getElementById('priority-poll-results').innerHTML = `<p class="text-xs text-slate-400 italic">보관함이 비어 통계가 제공되지 않습니다.</p>`;
+                document.getElementById('vulnerable-category-chart').innerHTML = `<p class="text-xs text-slate-400 italic">보관함이 비어 취약 분야 정보가 존재하지 않습니다.</p>`;
+                return;
+            }
+
+            records.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            const pollCounts = { "구강 건강": 0, "눈 건강": 0, "적정 체중 및 건강관리": 0 };
+            const weakCounts = { "구강 건강": 0, "눈 건강": 0, "적정 체중": 0 };
+            
+            tableBody.innerHTML = "";
+            records.forEach(record => {
+                if (pollCounts.hasOwnProperty(record.priority)) {
+                    pollCounts[record.priority]++;
+                }
+                if (record.weakest && Array.isArray(record.weakest)) {
+                    record.weakest.forEach(w => {
+                        if (weakCounts.hasOwnProperty(w)) {
+                            weakCounts[w]++;
+                        }
+                    });
+                }
+
+                const oScore = record.scores?.["구강 건강"] !== undefined ? `${record.scores["구강 건강"]}/5` : "-";
+                const eScore = record.scores?.["눈 건강"] !== undefined ? `${record.scores["눈 건강"]}/5` : "-";
+                const wScore = record.scores?.["적정 체중"] !== undefined ? `${record.scores["적정 체중"]}/5` : "-";
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 border-b border-slate-100";
+                tr.innerHTML = `
+                    <td class="px-4 py-3 font-bold text-slate-800">${record.studentName || "익명 대원"}</td>
+                    <td class="px-4 py-3"><span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded">${record.priority || "미선택"}</span></td>
+                    <td class="px-4 py-3">${oScore}</td>
+                    <td class="px-4 py-3">${eScore}</td>
+                    <td class="px-4 py-3">${wScore}</td>
+                    <td class="px-4 py-3">
+                        <button onclick='viewStudentDetail(${JSON.stringify(record)})' class="bg-indigo-100 text-indigo-700 hover:bg-indigo-200 px-2 py-1 rounded font-bold text-[10px] transition-all">
+                            🔍 상세보기
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            const pollContainer = document.getElementById('priority-poll-results');
+            pollContainer.innerHTML = "";
+            const totalVotes = Object.values(pollCounts).reduce((a, b) => a + b, 0) || 1;
+            Object.entries(pollCounts).forEach(([topic, count]) => {
+                const pct = Math.round((count / totalVotes) * 100);
+                const barColor = topic === "구강 건강" ? "bg-blue-400" : topic === "눈 건강" ? "bg-amber-400" : "bg-rose-400";
+                pollContainer.innerHTML += `
+                    <div>
+                        <div class="flex justify-between text-[11px] font-bold text-slate-600 mb-1">
+                            <span>${topic}</span>
+                            <span>${count}표 (${pct}%)</span>
+                        </div>
+                        <div class="w-full bg-white h-2.5 rounded-full overflow-hidden border border-slate-200">
+                            <div class="${barColor} h-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const weakContainer = document.getElementById('vulnerable-category-chart');
+            weakContainer.innerHTML = "";
+            const totalWeakPoints = Object.values(weakCounts).reduce((a, b) => a + b, 0) || 1;
+            Object.entries(weakCounts).forEach(([topic, count]) => {
+                const pct = Math.round((count / totalWeakPoints) * 100);
+                const barColor = "bg-rose-500";
+                weakContainer.innerHTML += `
+                    <div>
+                        <div class="flex justify-between text-[11px] font-bold text-slate-600 mb-1">
+                            <span>🚨 ${topic} 취약</span>
+                            <span>${count}명 (${pct}%)</span>
+                        </div>
+                        <div class="w-full bg-white h-2.5 rounded-full overflow-hidden border border-slate-200">
+                            <div class="${barColor} h-full" style="width: ${pct}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function viewStudentDetail(record) {
+            const detailContainer = document.getElementById('student-detail-content');
+            
+            let weakestStr = record.weakest && record.weakest.length > 0 ? record.weakest.join(', ') : "없음 (튼튼해요!)";
+            let healthiestStr = record.healthiest && record.healthiest.length > 0 ? record.healthiest.join(', ') : "없음";
+            
+            let formattedAIAdvice = record.aiResponse ? marked.parse(record.aiResponse) : "<p class='text-slate-400 italic'>아직 AI 피드백을 수신하지 않은 대원입니다.</p>";
+
+            detailContainer.innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-4 rounded-2xl border text-xs sm:text-sm">
+                        <p><strong>대원 이름:</strong> ${record.studentName}</p>
+                        <p><strong>제출 시간:</strong> ${new Date(record.timestamp).toLocaleString()}</p>
+                        <p><strong>희망 주제:</strong> ${record.priority}</p>
+                        <p><strong>취약(보완):</strong> <span class="text-rose-600 font-bold">${weakestStr}</span></p>
+                        <p class="col-span-2"><strong>강점(지키기):</strong> <span class="text-green-600 font-bold">${healthiestStr}</span></p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-extrabold text-slate-800 text-sm mb-2">🧚‍♀️ 하트 선생님의 처방전 내용:</h4>
+                        <div class="bg-pink-50/50 border border-pink-200 rounded-2xl p-4 text-xs max-h-[250px] overflow-y-auto prose">
+                            ${formattedAIAdvice}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('student-detail-modal').classList.remove('hidden');
+        }
+
+        function closeStudentDetailModal() {
+            document.getElementById('student-detail-modal').classList.add('hidden');
+        }
+
+        function closeTeacherDashboard() {
+            showView('step-intro');
+        }
+
+        function exportToCSV() {
+            const records = getStoredRecords();
+            if (records.length === 0) {
+                showAlert("내보낼 대원들의 기록이 전혀 존재하지 않습니다!");
+                return;
+            }
+
+            let csvContent = "\uFEFF"; // BOM for Korean Excel encoding support
+            csvContent += "제출 일시,학번/이름,우선 희망주제,구강 건강 점수,눈 건강 점수,적정 체중 점수,보완 필요 영역,수호 영역\n";
+
+            records.forEach(r => {
+                const date = new Date(r.timestamp).toLocaleString().replace(/,/g, '');
+                const oral = r.scores["구강 건강"] || 0;
+                const eye = r.scores["눈 건강"] || 0;
+                const weight = r.scores["적정 체중"] || 0;
+                const weakest = (r.weakest || []).join(" | ");
+                const healthiest = (r.healthiest || []).join(" | ");
+
+                csvContent += `"${date}","${r.studentName}","${r.priority}",${oral},${eye},${weight},"${weakest}","${healthiest}"\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `비밀보건탐험대_학급통계_${new Date().toLocaleDateString()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
