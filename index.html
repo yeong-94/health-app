@@ -501,7 +501,6 @@
 
     <!-- App Logic Scripts -->
     <script>
-        const apiKey = ""; 
         let studentName = "";
         let currentQuizIndex = 0;
         let selectedPriority = "";
@@ -509,9 +508,6 @@
         let shuffledQuiz = []; 
 
         // Get API key from either hardcoded variable or local storage (for mobile reliability)
-        function getGeminiApiKey() {
-            return apiKey || localStorage.getItem("health_expedition_gemini_api_key") || "";
-        }
 
         // 40 questions completely customized for 4th-6th grade based on requested items. Water-redundancy completely fixed.
         const database = {
@@ -565,7 +561,6 @@
 
         const LOCAL_STORAGE_KEY = "health_expedition_class_records";
         const WEBHOOK_STORAGE_KEY = "health_expedition_webhook_url";
-        const API_KEY_STORAGE_KEY = "health_expedition_gemini_api_key";
 
         function getStoredRecords() {
             try {
@@ -588,9 +583,10 @@
             }
         }
 
-        function getStoredWebhookUrl() {
-            return localStorage.getItem(WEBHOOK_STORAGE_KEY) || "";
-        }
+function getStoredWebhookUrl() {
+    return "https://script.google.com/macros/s/AKfycbyccHbe5dANNUfR61Fpivqg6fV3cZSxdDYoqYp-SxqhDGdqmDfTni9-IU00YeuNK2jWpg/exec";
+}
+        
 
         function saveWebhookUrl() {
             const urlInput = document.getElementById('webhook-url-input').value.trim();
@@ -598,11 +594,6 @@
             showAlert("구글 Webhook URL이 브라우저 로컬 저장소에 영구 저장되었습니다! 💾");
         }
 
-        function saveGeminiApiKey() {
-            const keyInput = document.getElementById('api-key-input').value.trim();
-            localStorage.setItem(API_KEY_STORAGE_KEY, keyInput);
-            showAlert("제미나이 API 키가 브라우저에 안전하게 저장되었습니다! 이제 모바일에서도 원활하게 동작합니다. 🔑");
-        }
 
         // Post submission to Google Sheets Web App Webhook (Real-time syncing)
         async function postToGoogleSheets(recordData) {
@@ -614,6 +605,7 @@
 
             try {
                 const payload = {
+                    action: "save",
                     timestamp: recordData.timestamp,
                     studentName: recordData.studentName,
                     priority: recordData.priority,
@@ -867,14 +859,6 @@
         }
 
         async function fetchAIWhimsicalAdvice() {
-            const activeKey = getGeminiApiKey();
-            if (!activeKey) {
-                document.getElementById('ai-loading').classList.add('hidden');
-                document.getElementById('trigger-ai-btn').classList.remove('hidden');
-                showAlert("보건교사 AI 편지를 열려면 제미나이 API 키 설정이 필요합니다. 우측 하단 [🔑 선생님 기록실]에서 API 키를 먼저 입력해 주세요!");
-                return;
-            }
-
             document.getElementById('ai-loading').classList.remove('hidden');
             document.getElementById('ai-response-container').classList.add('hidden');
             document.getElementById('trigger-ai-btn').classList.add('hidden');
@@ -926,7 +910,6 @@
                     if (localRecords[lastIndex].studentName === studentName) {
                         localRecords[lastIndex].aiResponse = responseText;
                         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(localRecords));
-                        postToGoogleSheets(localRecords[lastIndex]);
                     }
                 }
             } catch (err) {
@@ -936,44 +919,67 @@
                 showAlert("하트 선생님의 연금 가마솥 온도가 잠시 떨어졌어요! '마법 가이드 해제하기'를 다시 눌러주세요.");
             }
         }
+async function callGeminiAPI(userText, systemText) {
+    const webhookUrl = getStoredWebhookUrl();
 
-        async function callGeminiAPI(userText, systemText) {
-            const activeKey = getGeminiApiKey();
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${activeKey}`;
-            const delays = [1000, 2000, 4000, 8000];
+    if (!webhookUrl) {
+        throw new Error(
+            "Google Apps Script 웹앱 주소가 설정되지 않았습니다."
+        );
+    }
 
-            for (let i = 0; i < delays.length; i++) {
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [{ text: userText }]
-                            }],
-                            systemInstruction: {
-                                parts: [{ text: systemText }]
-                            }
-                        })
-                    });
+    const delays = [0, 1500, 3000];
 
-                    if (!response.ok) {
-                        throw new Error(`Server returned error: ${response.status}`);
-                    }
-
-                    const json = await response.json();
-                    return json.candidates?.[0]?.content?.parts?.[0]?.text || "요정 상담 멘트 수집에 일시적으로 실패했어요. 다시 연결해 보세요!";
-                } catch (error) {
-                    if (i === delays.length - 1) {
-                        throw error;
-                    }
-                    await new Promise(resolve => setTimeout(resolve, delays[i]));
-                }
-            }
+    for (let attempt = 0; attempt < delays.length; attempt++) {
+        if (delays[attempt] > 0) {
+            await new Promise(resolve =>
+                setTimeout(resolve, delays[attempt])
+            );
         }
 
+        try {
+            const response = await fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    action: "gemini",
+                    userPrompt: userText,
+                    systemPrompt: systemText
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(
+                    `Apps Script 연결 오류: ${response.status}`
+                );
+            }
+
+            const result = await response.json();
+
+            if (result.status !== "success") {
+                throw new Error(
+                    result.message ||
+                    "AI 답변 생성에 실패했습니다."
+                );
+            }
+
+            return result.answer;
+
+        } catch (error) {
+            console.error(
+                `AI 호출 ${attempt + 1}차 실패`,
+                error
+            );
+
+            if (attempt === delays.length - 1) {
+                throw error;
+            }
+        }
+    }
+}
+    
         function restartExpedition() {
             document.getElementById('student-name').value = '';
             document.getElementById('trigger-ai-btn').classList.remove('hidden');
@@ -1004,7 +1010,34 @@
         function closeTeacherAuthModal() {
             document.getElementById('teacher-auth-modal').classList.add('hidden');
         }
+function togglePasswordVisibility() {
+    const passwordInput =
+        document.getElementById('teacher-password-input');
+    const toggleIcon =
+        document.getElementById('password-toggle-icon');
 
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.className = "fa-solid fa-eye-slash";
+    } else {
+        passwordInput.type = "password";
+        toggleIcon.className = "fa-solid fa-eye";
+    }
+}
+
+function verifyTeacherPassword() {
+    const password = document
+        .getElementById('teacher-password-input')
+        .value
+        .trim();
+
+    if (password === "1234") {
+        closeTeacherAuthModal();
+        loadTeacherDashboard();
+    } else {
+        showAlert("비밀번호가 일치하지 않습니다.");
+    }
+}
         function loadTeacherDashboard() {
             showView('teacher-dashboard');
             document.getElementById('webhook-url-input').value = getStoredWebhookUrl();
